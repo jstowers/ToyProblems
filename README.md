@@ -1,3 +1,3 @@
 # ToyProblems
 
-### This repository provides a sample of toy problems solved in JavaScript.
+### This repository provides a sample of solved JavaScript toy problems.
