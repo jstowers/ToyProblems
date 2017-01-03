@@ -8,9 +8,9 @@
 	Write a function that accepts an array of integers and returns the 
 	largest product possible from three of those numbers.
 
-	[2, 1, 3, 7] 				=> 2 * 3 * 7 = 42
+	[2, 1, 3, 7]                => 2 * 3 * 7 = 42
 
-	[-5, -1, -3, -2, -4] 		=> -3 * -2 * -1 = -6
+	[-5, -1, -3, -2, -4]        => -3 * -2 * -1 = -6
 
 	[-31, 41, 34, -37, -17, 29] => -31 * -37 * 41 = 47,027
 
