@@ -37,8 +37,9 @@ function largestProductOfThree (array) {
 	return Math.max(doubleNegCombo, bigThreeCombo);
 }
 
+
 console.log(largestProductOfThree([ 2, 1, 3, 7 ]));
 
-console.log(largestProductOfThree([-5, -1, -3, -2, -4]))
+console.log(largestProductOfThree([-5, -1, -3, -2, -4]));
 
-console.log(largestProductOfThree([-31, 41, 34, -37, -17, 29]))
+console.log(largestProductOfThree([-31, 41, 34, -37, -17, 29]));
