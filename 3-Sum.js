@@ -11,3 +11,7 @@
 
 let array = [30, -40, -10, 40, 0, 10, 5]
 
+let N = array.length;
+
+console.log('N = ', N)
+
