@@ -2,6 +2,9 @@
 
 ### This repository provides a sample of solved JavaScript toy problems.
 
+#### April 11, 2017
+Palindrome
+
 #### January 3, 2017
 Largest Product of Three
 
