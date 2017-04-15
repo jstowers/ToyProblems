@@ -1,18 +1,21 @@
-# ToyProblems
+## Toy Problems
 
-### This repository provides a sample of solved JavaScript toy problems.
+This repository provides a sample of solved JavaScript toy problems.
+---
+___April 15, 2017___
+ThreeSum
 
-#### April 11, 2017
+___April 11, 2017___
 Palindrome
 
-#### January 3, 2017
+___January 3, 2017___
 Largest Product of Three
 
-#### December 10, 2016
+___December 10, 2016___
 Substring Search
 
-#### November 30, 2016
+___November 30, 2016___
 First Duplicate
 
-#### November 27, 2016
+___November 27, 2016___
 Zero Sum
