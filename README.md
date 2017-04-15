@@ -1,6 +1,6 @@
 ## Toy Problems ##
 
-This repository provides a sample of solved JavaScript toy problems.
+### This repository provides a sample of solved JavaScript toy problems. ###
 ---
 
 __April 15, 2017:__      ThreeSum
