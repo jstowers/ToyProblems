@@ -3,9 +3,7 @@
 ### This repository provides a sample of solved JavaScript toy problems.
 ---
 
-___April 15, 2017___
-
-ThreeSum
+__April 15, 2017:__  ThreeSum
 
 ___April 11, 2017___
 
