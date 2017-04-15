@@ -1,4 +1,4 @@
-##Toy Problems
+## Toy Problems ##
 
 This repository provides a sample of solved JavaScript toy problems.
 ---
