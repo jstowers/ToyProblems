@@ -3,24 +3,14 @@
 ### This repository provides a sample of solved JavaScript toy problems.
 ---
 
-__April 15, 2017:__  ThreeSum
+__April 15, 2017:__     ThreeSum
 
-___April 11, 2017___
+__April 11, 2017:__     Palindrome
 
-Palindrome
+__January 3, 2017__     Largest Product of Three
 
-___January 3, 2017___
+__December 10, 2016__   Substring Search
 
-Largest Product of Three
+__November 30, 2016__   First Duplicate
 
-___December 10, 2016___
-
-Substring Search
-
-___November 30, 2016___
-
-First Duplicate
-
-___November 27, 2016___
-
-Zero Sum
+__November 27, 2016__   Zero Sum
