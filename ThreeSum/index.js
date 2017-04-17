@@ -13,7 +13,12 @@
 
 */
 
-// read text file containing strings of integers
+
+// require is a relative file reference
+const functions = require('./quickSort');
+
+
+// read text file containing a string of integers
 const fs = require('fs');
 let intsFile = fs.readFileSync(process.argv[2], 'utf-8');
 
@@ -66,9 +71,16 @@ function ThreeSum (array) {
 
 let array = makeIntArray(intsFile);
 
+let arrayShuffle = functions.shuffle(array);
+console.log('arrayShuffle =', arrayShuffle);
+
+functions.quickSort(arrayShuffle, 0, arrayShuffle.length-1);
+console.log('Array after quicksort =', arrayShuffle);
+
+
 // Calculate performance time for ThreeSum()
 let t0 = Date.now();
-console.log('ThreeSum count =', ThreeSum(array));
+console.log('ThreeSum count =', ThreeSum(arrayShuffle));
 let t1 = Date.now();
 console.log('ThreeSum took = ', (t1 - t0), ' ms');
 
