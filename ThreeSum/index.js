@@ -41,7 +41,7 @@ makeIntArray = (string) => {
 	return storage;
 }
 
-
+/*
 function ThreeSum (array) {
 
 	console.log('calculating ThreeSum . . .');
@@ -68,20 +68,62 @@ function ThreeSum (array) {
 	return count;
 }
 
+*/
 
-let array = makeIntArray(intsFile);
 
+// let array = makeIntArray(intsFile);
+
+
+let array = [-1, 5, 3, -6, -8, 10, -4, 12, 2, 6]
+
+let t0 = Date.now();
 let arrayShuffle = functions.shuffle(array);
-console.log('arrayShuffle =', arrayShuffle);
-
 functions.quickSort(arrayShuffle, 0, arrayShuffle.length-1);
-console.log('Array after quicksort =', arrayShuffle);
+let t1 = Date.now();
+console.log('quickSort took = ', (t1 - t0), ' ms');
+
+
+function ThreeSum(array) {
+
+	let count = 0;
+
+	let storage = [];
+
+	function recursive(array) {
+
+		// base case
+		if (array[0] > 0) {
+			return storage;	
+		}
+
+		let leftNeg = array[0];
+		let rightPos = array[array.length-1];
+
+		console.log('leftNeg =', leftNeg, '  rightPos =', rightPos);
+
+		if(rightPos >= Math.abs(leftNeg)) {
+
+			recursive(array.slice(0,array.length-1));
+		}
+
+		else if(rightPos > (0.5*Math.abs(leftNeg))) {
+			storage.push(leftNeg + rightPos);
+			recursive(array.slice(1));
+		}
+	}
+
+	recursive(array);
+	console.log('storage length =', storage.length);
+
+	return storage;
+
+}
 
 
 // Calculate performance time for ThreeSum()
-let t0 = Date.now();
-console.log('ThreeSum count =', ThreeSum(arrayShuffle));
-let t1 = Date.now();
+t0 = Date.now();
+console.log('ThreeSum storage =', ThreeSum(arrayShuffle));
+t1 = Date.now();
 console.log('ThreeSum took = ', (t1 - t0), ' ms');
 
 /*
