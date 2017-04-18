@@ -73,8 +73,9 @@ function ThreeSum (array) {
 
 // let array = makeIntArray(intsFile);
 
+// let array = [-1, 5, 3, -6, -8, 10, -4, 12, 2, 6];
 
-let array = [-1, 5, 3, -6, -8, 10, -4, 12, 2, 6]
+let array = [20, -2, 5, 2, -8, -15, 10, 6, -1, 9]
 
 let t0 = Date.now();
 let arrayShuffle = functions.shuffle(array);
@@ -88,41 +89,62 @@ function ThreeSum(array) {
 	let count = 0;
 
 	let storage = [];
+	let posInts = []
 
 	function recursive(array) {
 
 		// base case
-		if (array[0] > 0) {
-			return storage;	
+		if (array.length === 0) {
+			return;	
 		}
 
 		let leftNeg = array[0];
 		let rightPos = array[array.length-1];
 
+		console.log(array);
 		console.log('leftNeg =', leftNeg, '  rightPos =', rightPos);
 
 		if(rightPos >= Math.abs(leftNeg)) {
 
-			recursive(array.slice(0,array.length-1));
+			console.log('inside first if');
+			console.log('--------------------------------');
+			recursive(array.slice(0, array.length-1));
 		}
 
 		else if(rightPos > (0.5*Math.abs(leftNeg))) {
+
+			console.log('inside second if');
+			console.log('--------------------------------');
 			storage.push(leftNeg + rightPos);
+
+			
+			if (posInts[posInts.length-1] !== rightPos){
+				posInts.push(rightPos);
+			}
+
+			recursive(array.slice(0, array.length-1));
+		}
+
+		else if(rightPos > 0 && rightPos < (0.5*Math.abs(leftNeg))) {
+
+			console.log('inside third if');
+			console.log('--------------------------------');
+			if (posInts[posInts.length-1] !== rightPos) {
+				posInts.push(rightPos);
+			}			
 			recursive(array.slice(1));
 		}
 	}
 
 	recursive(array);
-	console.log('storage length =', storage.length);
 
-	return storage;
-
+	return {storage, posInts};
 }
 
 
 // Calculate performance time for ThreeSum()
 t0 = Date.now();
-console.log('ThreeSum storage =', ThreeSum(arrayShuffle));
+console.log('ThreeSum result =', ThreeSum(arrayShuffle));
 t1 = Date.now();
 console.log('ThreeSum took = ', (t1 - t0), ' ms');
 
