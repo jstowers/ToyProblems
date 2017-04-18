@@ -17,10 +17,15 @@
 // require is a relative file reference
 const functions = require('./quickSort');
 
-
 // read text file containing a string of integers
 const fs = require('fs');
 let intsFile = fs.readFileSync(process.argv[2], 'utf-8');
+
+
+
+// let array = [20, -2, 5, 2, -8, -15, 10, 6, -1, 9] // 5 in 15 ms
+// let array = 1Kints.txt // 70 in 5159 ms
+
 
 // convert strings of integers to array
 makeIntArray = (string) => {
@@ -68,21 +73,28 @@ function ThreeSum (array) {
 	return count;
 }
 
+t0 = Date.now();
+let result = ThreeSum(array);
+console.log('result =', result);
+t1 = Date.now();
+console.log('ThreeSum took = ', (t1 - t0), ' ms');
+
 */
 
 
-// let array = makeIntArray(intsFile);
 
-// let array = [-1, 5, 3, -6, -8, 10, -4, 12, 2, 6];
+let array = makeIntArray(intsFile);
 
-let array = [20, -2, 5, 2, -8, -15, 10, 6, -1, 9]
+// let array = [-1, 5, 3, -6, -8, 10, -4, 12, 2, 6]; // 2
+
+// let array = [20, -2, 5, 2, -8, -15, 10, 6, -1, 9] // 3
+
 
 let t0 = Date.now();
 let arrayShuffle = functions.shuffle(array);
 functions.quickSort(arrayShuffle, 0, arrayShuffle.length-1);
 let t1 = Date.now();
 console.log('quickSort took = ', (t1 - t0), ' ms');
-
 
 function ThreeSum(array) {
 
@@ -125,7 +137,7 @@ function ThreeSum(array) {
 			recursive(array.slice(0, array.length-1));
 		}
 
-		else if(rightPos > 0 && rightPos < (0.5*Math.abs(leftNeg))) {
+		else if(rightPos > 0 && rightPos <= (0.5*Math.abs(leftNeg))) {
 
 			console.log('inside third if');
 			console.log('--------------------------------');
@@ -144,11 +156,58 @@ function ThreeSum(array) {
 
 // Calculate performance time for ThreeSum()
 t0 = Date.now();
-console.log('ThreeSum result =', ThreeSum(arrayShuffle));
+let result = ThreeSum(arrayShuffle);
+console.log('result =', result);
+
+let storageSort = functions.shuffle(result.storage);
+functions.quickSort(result.storage, 0, result.storage.length-1);
+console.log('storageSort = ', storageSort);
+
+let finalResult = countTriples(storageSort, result.posInts);
+console.log('total triples =', finalResult);
+
 t1 = Date.now();
 console.log('ThreeSum took = ', (t1 - t0), ' ms');
 
+
+function countTriples(storageArray, posIntsArray) {
+
+	let count = 0;
+
+	function recursive(storageArray, posIntsArray) {
+
+		if (storageArray.length === 0){
+			console.log('total count = ', count);
+			return count;
+		}
+
+		else if (posIntsArray[0] > Math.abs(storageArray[0])){
+			recursive(storageArray, posIntsArray.slice(1));
+		}
+
+		else if (posIntsArray[0] + storageArray[0] === 0){
+			count += 1;
+			recursive(storageArray.slice(1), posIntsArray.slice(1));
+		}
+
+		else recursive(storageArray.slice(1), posIntsArray);
+	}
+
+	recursive(storageArray, posIntsArray);
+
+	return count;
+}
+
+
+
+
+
 /*
+	[ -15, -8, -2, -1, 2, 5, 6, 9, 10, 20 ]
+	Quicksort = 19 ms
+	ThreeSum  =  4 ms
+	Total     = 23 ms
+
 	*** RESULTS ***
 
 	NumInts (N)		Triples 	Time (T) (ms)
