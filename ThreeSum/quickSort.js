@@ -44,7 +44,6 @@ function partition (arr, lo, hi) {
 	arr[lo] = arr[j];
 	arr[j] = temp;
 
-	console.log('arr =', arr);
 	return j;
 }
 

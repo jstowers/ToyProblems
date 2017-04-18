@@ -46,49 +46,12 @@ makeIntArray = (string) => {
 	return storage;
 }
 
-/*
-function ThreeSum (array) {
 
-	console.log('calculating ThreeSum . . .');
+// let array = makeIntArray(intsFile);
 
-	let count = 0;
+let array = [-15, -1, 5, 3, -6, -8, 10, -4, 12,  2, 6, 1]; // 5 in 5 ms
 
-	let N = array.length;
-
-	for (let i = 0; i < N; i++) {
-
-		for (let j = i+1; j < N; j++){
-
-			for (let k = j +1; k < N; k++) {
-
-				if (array[i] + array[j] + array[k] === 0) {
-
-					count += 1;
-
-				}
-			}
-		}
-	}
-
-	return count;
-}
-
-t0 = Date.now();
-let result = ThreeSum(array);
-console.log('result =', result);
-t1 = Date.now();
-console.log('ThreeSum took = ', (t1 - t0), ' ms');
-
-*/
-
-
-
-let array = makeIntArray(intsFile);
-
-// let array = [-1, 5, 3, -6, -8, 10, -4, 12, 2, 6]; // 2
-
-// let array = [20, -2, 5, 2, -8, -15, 10, 6, -1, 9] // 3
-
+// let array = [-2, 5, 2, -8, -15, 10, 6, -1, 9] // 3 in 4 ms
 
 let t0 = Date.now();
 let arrayShuffle = functions.shuffle(array);
@@ -116,7 +79,7 @@ function ThreeSum(array) {
 		console.log(array);
 		console.log('leftNeg =', leftNeg, '  rightPos =', rightPos);
 
-		if(rightPos >= Math.abs(leftNeg)) {
+		if(rightPos > Math.abs(leftNeg)) {
 
 			console.log('inside first if');
 			console.log('--------------------------------');
@@ -127,8 +90,23 @@ function ThreeSum(array) {
 
 			console.log('inside second if');
 			console.log('--------------------------------');
-			storage.push(leftNeg + rightPos);
 
+			/* Tried to implement sorting upon insertion, but
+			only works for sums that are < than storage[0].  Does
+			not work for sums that are inbetween array elements.
+			This may shave 1ms off the computing time for an array
+			of 4 elements.
+			*/
+			/*
+			if(leftNeg + rightPos < storage[0]) {
+
+				storage.splice(0,0,leftNeg+rightPos);
+
+			} else storage.push(leftNeg + rightPos);
+			*/
+			if (leftNeg + rightPos !== 0){
+				storage.push(leftNeg + rightPos);
+			}
 			
 			if (posInts[posInts.length-1] !== rightPos){
 				posInts.push(rightPos);
@@ -146,6 +124,7 @@ function ThreeSum(array) {
 			}			
 			recursive(array.slice(1));
 		}
+
 	}
 
 	recursive(array);
@@ -157,43 +136,49 @@ function ThreeSum(array) {
 // Calculate performance time for ThreeSum()
 t0 = Date.now();
 let result = ThreeSum(arrayShuffle);
-console.log('result =', result);
+// console.log('result =', result);
 
 let storageSort = functions.shuffle(result.storage);
 functions.quickSort(result.storage, 0, result.storage.length-1);
 console.log('storageSort = ', storageSort);
 
-let finalResult = countTriples(storageSort, result.posInts);
-console.log('total triples =', finalResult);
+let posIntsArray = result.posInts;
+console.log('posIntsArray =', posIntsArray);
+console.log('--------------------------------');
+
+let finalResult = countTriples(storageSort, posIntsArray);
+console.log('ThreeSum triples =', finalResult);
 
 t1 = Date.now();
-console.log('ThreeSum took = ', (t1 - t0), ' ms');
+console.log('ThreeSum took =', (t1 - t0), 'ms');
 
 
-function countTriples(storageArray, posIntsArray) {
+function countTriples(negSumArray, posIntsArray) {
 
 	let count = 0;
 
-	function recursive(storageArray, posIntsArray) {
+	function recursive(negSumArray, posIntsArray) {
 
-		if (storageArray.length === 0){
-			console.log('total count = ', count);
+		if (negSumArray.length === 0){
 			return count;
 		}
 
-		else if (posIntsArray[0] > Math.abs(storageArray[0])){
-			recursive(storageArray, posIntsArray.slice(1));
+		let negSum = negSumArray[0];
+		let posInt = posIntsArray[0];
+
+		if (posInt > Math.abs(negSum)){
+			recursive(negSumArray, posIntsArray.slice(1));
 		}
 
-		else if (posIntsArray[0] + storageArray[0] === 0){
+		else if (posInt + negSum === 0){
 			count += 1;
-			recursive(storageArray.slice(1), posIntsArray.slice(1));
+			recursive(negSumArray.slice(1), posIntsArray);
 		}
 
-		else recursive(storageArray.slice(1), posIntsArray);
+		else recursive(negSumArray.slice(1), posIntsArray);
 	}
 
-	recursive(storageArray, posIntsArray);
+	recursive(negSumArray, posIntsArray);
 
 	return count;
 }
