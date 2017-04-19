@@ -1,5 +1,7 @@
 
-let array = [-15, -1, 5, 3, -6, -8, 10, -4, 12,  2, 6, 1]; // 9 in 17ms
+// let array = [-15, -1, 5, 3, -6, -8, 10, -4, 12,  2, 6, 1]; // 9 in 17ms
+
+let array = [-5, -4, -3, 1, 2, 3, 4, 5, 6, 7];
 
 function ThreeSum (array) {
 
@@ -16,6 +18,8 @@ function ThreeSum (array) {
 			for (let k = j +1; k < N; k++) {
 
 				if (array[i] + array[j] + array[k] === 0) {
+
+					console.log('array[i] =', array[i], ' array[j] =', array[j], ' array[k] =', array[k]);
 
 					count += 1;
 

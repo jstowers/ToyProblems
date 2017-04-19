@@ -13,14 +13,14 @@
 
 */
 
-
+/*
 // require is a relative file reference
 const functions = require('./quickSort');
 
 // read text file containing a string of integers
 const fs = require('fs');
 let intsFile = fs.readFileSync(process.argv[2], 'utf-8');
-
+*/
 
 
 // let array = [20, -2, 5, 2, -8, -15, 10, 6, -1, 9] // 5 in 15 ms
@@ -49,15 +49,101 @@ makeIntArray = (string) => {
 
 // let array = makeIntArray(intsFile);
 
-let array = [-15, -1, 5, 3, -6, -8, 10, -4, 12,  2, 6, 1]; // 5 in 5 ms
-
+// One negative and Two positive integers
+// let array = [ -15, -8, -2, -1, 2, 5, 6, 9, 10, 20 ]
+// let array = [-15, -1, 5, 3, -6, -8, 10, -4, 12,  2, 6, 1]; // 5 in 5-7 ms
 // let array = [-2, 5, 2, -8, -15, 10, 6, -1, 9] // 3 in 4 ms
 
-let t0 = Date.now();
-let arrayShuffle = functions.shuffle(array);
-functions.quickSort(arrayShuffle, 0, arrayShuffle.length-1);
-let t1 = Date.now();
-console.log('quickSort took = ', (t1 - t0), ' ms');
+
+//let array = [-15, -14, -13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
+//12, 13, 14, 15, 16, 17, 18, 19, 20];
+
+let array = [-5, -4, -3, 1, 2, 3, 4, 5, 6, 7]
+
+
+//let t0 = Date.now();
+//let arrayShuffle = functions.shuffle(array);
+//functions.quickSort(arrayShuffle, 0, arrayShuffle.length-1);
+//let t1 = Date.now();
+//console.log('quickSort took = ', (t1 - t0), ' ms');
+
+
+// updated ThreeSum
+function ThreeSum(array) {
+
+	let storage = [];
+	let posInts = [];
+	let index = 1;
+
+	function recursive(array) {
+
+		if(array.length === 0) {
+			return;
+		}
+
+		let lftInt = array[0];
+		let rhtInt = array[array.length-1];
+
+		// are there negative integers in array?
+		if (lftInt < 1) {
+
+			console.log(array);
+			console.log(storage);
+
+			// ignore all positive integers > lftInt
+			if(rhtInt >= Math.abs(lftInt)) {
+				console.log('inside first if');
+				console.log('--------------------------------');
+				recursive(array.slice(0, array.length-1));
+			}
+
+			// sum lftInt and rhtInt
+			else if (rhtInt > 0 && rhtInt > (0.5*Math.abs(lftInt))) {
+				console.log('inside second if');
+				console.log('--------------------------------');
+
+				function innerRecursive(tempArray) {
+
+					console.log('tempArray =', tempArray);
+
+					let rhtInnerInt = tempArray[tempArray.length-1];
+
+					if(rhtInnerInt < 1) {
+						return;
+					}
+
+					storage.push(lftInt + rhtInnerInt);
+					console.log('storage = ', storage);
+
+					innerRecursive(tempArray.slice(0, tempArray.length-1));
+
+				}
+
+				innerRecursive(array);
+
+				recursive(array.slice(0, array.length-1));
+
+			}
+
+			else if(rhtInt > 0 && rhtInt <= (0.5*Math.abs(lftInt))) {
+				console.log('inside third if');
+				console.log('--------------------------------');	
+				recursive(array.slice(1));
+			}
+		}
+	}
+
+	recursive(array);
+}
+
+// Calculate performance time for ThreeSum()
+t0 = Date.now();
+console.log(ThreeSum(array));
+t1 = Date.now();
+console.log('ThreeSum took =', (t1 - t0), 'ms');
+
+
+/*
 
 function ThreeSum(array) {
 
@@ -103,7 +189,8 @@ function ThreeSum(array) {
 				storage.splice(0,0,leftNeg+rightPos);
 
 			} else storage.push(leftNeg + rightPos);
-			*/
+			
+
 			if (leftNeg + rightPos !== 0){
 				storage.push(leftNeg + rightPos);
 			}
@@ -132,12 +219,12 @@ function ThreeSum(array) {
 	return {storage, posInts};
 }
 
+*/
 
-// Calculate performance time for ThreeSum()
-t0 = Date.now();
-let result = ThreeSum(arrayShuffle);
-// console.log('result =', result);
 
+
+
+/*
 let storageSort = functions.shuffle(result.storage);
 functions.quickSort(result.storage, 0, result.storage.length-1);
 console.log('storageSort = ', storageSort);
@@ -148,9 +235,8 @@ console.log('--------------------------------');
 
 let finalResult = countTriples(storageSort, posIntsArray);
 console.log('ThreeSum triples =', finalResult);
+*/
 
-t1 = Date.now();
-console.log('ThreeSum took =', (t1 - t0), 'ms');
 
 
 function countTriples(negSumArray, posIntsArray) {
