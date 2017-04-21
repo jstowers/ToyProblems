@@ -55,10 +55,10 @@ makeIntArray = (string) => {
 // let array = [-2, 5, 2, -8, -15, 10, 6, -1, 9] // 3 in 4 ms
 
 
-//let array = [-15, -14, -13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
-//12, 13, 14, 15, 16, 17, 18, 19, 20];
+let array = [-15, -14, -13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
+12, 13, 14, 15, 16, 17, 18, 19, 20];
 
-let array = [-5, -4, -3, 1, 2, 3, 4, 5, 6, 7]
+// let array = [-5, -4, -3, 1, 2, 3, 4, 5, 6, 7]
 
 
 //let t0 = Date.now();
@@ -67,7 +67,7 @@ let array = [-5, -4, -3, 1, 2, 3, 4, 5, 6, 7]
 //let t1 = Date.now();
 //console.log('quickSort took = ', (t1 - t0), ' ms');
 
-
+/*
 // updated ThreeSum
 function ThreeSum(array) {
 
@@ -136,6 +136,8 @@ function ThreeSum(array) {
 	recursive(array);
 }
 
+*/
+
 // Calculate performance time for ThreeSum()
 t0 = Date.now();
 console.log(ThreeSum(array));
@@ -143,14 +145,15 @@ t1 = Date.now();
 console.log('ThreeSum took =', (t1 - t0), 'ms');
 
 
-/*
-
 function ThreeSum(array) {
 
 	let count = 0;
 
 	let storage = [];
-	let posInts = []
+	let posInts = [];
+
+	let leftIntMax = array[0];
+	let rightIntMax = array[array.length-1];
 
 	function recursive(array) {
 
@@ -165,10 +168,13 @@ function ThreeSum(array) {
 		console.log(array);
 		console.log('leftNeg =', leftNeg, '  rightPos =', rightPos);
 
-		if(rightPos > Math.abs(leftNeg)) {
+		// right integer > left integer => sum of 0 impossible
+		if(rightPos > Math.abs(leftIntMax)) {
 
 			console.log('inside first if');
 			console.log('--------------------------------');
+			// determine max right integer for summation
+			rightIntMax=array[array.length-1];
 			recursive(array.slice(0, array.length-1));
 		}
 
@@ -182,20 +188,21 @@ function ThreeSum(array) {
 			not work for sums that are inbetween array elements.
 			This may shave 1ms off the computing time for an array
 			of 4 elements.
-			*/
-			/*
+
+			// sum < lowest element
 			if(leftNeg + rightPos < storage[0]) {
 
 				storage.splice(0,0,leftNeg+rightPos);
 
 			} else storage.push(leftNeg + rightPos);
+			*/
 			
 
-			if (leftNeg + rightPos !== 0){
+			if (leftNeg + rightPos < 0){
 				storage.push(leftNeg + rightPos);
 			}
 			
-			if (posInts[posInts.length-1] !== rightPos){
+			if (rightPos > 0 && rightPos < (0.5*Math.abs(rightIntMax)) && posInts[posInts.length-1] !== rightPos){
 				posInts.push(rightPos);
 			}
 
@@ -218,10 +225,6 @@ function ThreeSum(array) {
 
 	return {storage, posInts};
 }
-
-*/
-
-
 
 
 /*
