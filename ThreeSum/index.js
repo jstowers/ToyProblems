@@ -49,14 +49,14 @@ makeIntArray = (string) => {
 
 // let array = makeIntArray(intsFile);
 
-// One negative and Two positive integers
+// One negative and two positive integers:
 // let array = [ -15, -8, -2, -1, 2, 5, 6, 9, 10, 20 ]
 // let array = [-15, -1, 5, 3, -6, -8, 10, -4, 12,  2, 6, 1]; // 5 in 5-7 ms
 // let array = [-2, 5, 2, -8, -15, 10, 6, -1, 9] // 3 in 4 ms
 
 
-let array = [-15, -14, -13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
-12, 13, 14, 15, 16, 17, 18, 19, 20];
+//let array = [-15, -14, -13, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 
+//12, 13, 14, 15, 16, 17, 18, 19, 20];
 
 // let array = [-5, -4, -3, 1, 2, 3, 4, 5, 6, 7]
 
